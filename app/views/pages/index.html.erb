@@ -1,0 +1,46 @@
+<div style="display:flex; justify-content:space-between; align-items:center; padding-left: 20px; padding-right: 20px; border:1px solid black">
+	<% if current_user %>
+		<h4>You are signed in as <%= current_user.first_name %></h4>
+	<% end %>
+
+	<h1>Welcome to your Journal/Task Application!</h1>
+
+	<%= button_to "Log out", destroy_user_session_path, method: :delete, data: { turbo_method: :delete } %>
+</div>
+
+<div>
+	<%= link_to 'New Category', new_category_path %>
+</div>
+
+<div style="border:1px solid black; padding:10px">
+	<h2>Your Categories</h2>
+
+	<% if @categories.present? %>
+		<% @categories.each do |category| %>
+			<p>
+  			<li><%= link_to category.category_name, category_path(category) %></li>
+			</p>
+		<% end %>
+	<% else %>
+		<p>No categories found.</p>
+	<% end %>
+</div>
+
+<h2 style="color:red">Today's Tasks</h2>
+
+<% if @today_tasks.any? %>
+  <ul>
+    <% @today_tasks.each do |task| %>
+      <li>
+        <strong><%= task.task_name %></strong> - <%= task.description %><br>
+        Category: <%= link_to task.category.category_name, category_path(task.category) %><br>
+        Due: <%= task.due_date.strftime("%b %d, %Y") %> |
+        Completed: <%= task.completed ? "✅" : "❌" %>
+      </li>
+      <br>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No tasks scheduled for today!</p>
+<% end %>
+

@@ -1,0 +1,20 @@
+<h1><%= @task.task_name %></h1>
+
+<p><strong>Description:</strong> <%= @task.description %></p>
+<p><strong>Due Date:</strong> <%= @task.due_date ? @task.due_date.strftime("%B %d, %Y") : "None" %></p>
+<p><strong>Status:</strong> <%= @task.completed ? "✅ Completed" : "❌ Not completed" %></p>
+
+<hr>
+<%= form_with(model: [@category, @task], method: :patch, local: true) do |form| %>
+  <div>
+    <%= form.label :completed, "Mark as completed?" %>
+    <%= form.check_box :completed %>
+  </div>
+  <%= form.submit "Done" %>
+<% end %>
+<br>
+<%= link_to "Edit Task", edit_category_task_path(@category, @task) %> |
+<%= link_to "Delete Task", category_task_path(@category, @task),
+            data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this task?" } %>
+<br><br>
+<%= link_to "⬅ Back", category_path(@category) %>

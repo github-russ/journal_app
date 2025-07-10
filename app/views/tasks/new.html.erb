@@ -1,0 +1,17 @@
+<h1>Add a task for <%= @category.category_name %> </h1>
+
+<%= form_with model: [@category, @task] do |form| %>
+  <div>
+		<%= form.label :task_name %><br>
+		<%= form.text_field :task_name %><br>
+	</div>
+
+	<div>
+    <%= form.label :description %><br>
+    <%= form.text_area :description %><br>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
