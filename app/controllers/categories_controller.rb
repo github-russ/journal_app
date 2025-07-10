@@ -46,17 +46,16 @@ class CategoriesController < ApplicationController
   end
 
   private
-  
+
   def set_category
     @category = current_user.categories.find(params[:id])
   end
 
   def category_params
     params.require(:category).permit(:category_name, :description)
-  end 
+  end
 
   def record_not_found
     redirect_to root_path, alert: "Category not found."
   end
-
 end

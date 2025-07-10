@@ -3,7 +3,7 @@ class TasksController < ApplicationController
   before_action :authenticate_user!
   before_action :set_category
   before_action :set_task, only: %i[show edit update destroy]
-  
+
   def show; end
 
   def new
@@ -17,7 +17,7 @@ class TasksController < ApplicationController
       redirect_to @category, notice: "Successfully added a new Task."
     else
       flash[:alert] = "Failed to add a task."
-      render 'categories/show', status: :unprocessable_entity
+      render "categories/show", status: :unprocessable_entity
     end
   end
 
@@ -45,7 +45,7 @@ class TasksController < ApplicationController
   def set_task
     @task = @category.tasks.find(params[:id])
   end
-  
+
   def task_params
     params.require(:task).permit(:task_name, :description, :due_date, :completed)
   end

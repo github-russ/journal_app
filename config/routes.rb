@@ -17,11 +17,11 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#index"
-  get '/dashboard', to: "pages#index"
+  get "/dashboard", to: "pages#index"
 
   resources :categories do
     resources :tasks
   end
 
-  match '*unmatched', to: 'application#route_not_found', via: :all
+  match "*unmatched", to: "application#route_not_found", via: :all
 end

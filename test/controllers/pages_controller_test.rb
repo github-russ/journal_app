@@ -20,7 +20,7 @@ class PagesControllerTest < ActionDispatch::IntegrationTest
       completed: false
     )
   end
-  
+
   test "should get index" do
     get pages_index_path
     assert_response :success
